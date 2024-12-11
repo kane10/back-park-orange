@@ -1,7 +1,8 @@
 package com.orangeguinee.api_park_orange.service;
 
 import com.orangeguinee.api_park_orange.model.AppRole;
-import com.orangeguinee.api_park_orange.model.AppUser;
+import com.orangeguinee.api_park_orange.model.Users;
+import com.orangeguinee.api_park_orange.model.Users;
 import com.orangeguinee.api_park_orange.repository.AppRoleRepo;
 import com.orangeguinee.api_park_orange.repository.AppUserRepo;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public AppUser addNewUser(AppUser user) {
+    public Users addNewUser(Users user) {
 
         return appUserRepo.save(user);
     }
@@ -38,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        AppUser user = appUserRepo.findByUsername(username);
+        Users user = appUserRepo.findByUsername(username);
         AppRole role = appRoleRepo.findByRoleName(roleName);
         //Affection du role a l'utilisateur
 
@@ -48,13 +49,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AppUser loadUserByUsername(String username) {
+    public Users loadUserByUsername(String username) {
 
         return appUserRepo.findByUsername(username);
     }
 
     @Override
-    public List<AppUser> listUsers() {
+    public List<Users> listUsers() {
 
         return appUserRepo.findAll();
     }

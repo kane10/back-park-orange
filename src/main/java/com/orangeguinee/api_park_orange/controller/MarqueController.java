@@ -2,7 +2,6 @@ package com.orangeguinee.api_park_orange.controller;
 
 import com.orangeguinee.api_park_orange.model.Marque;
 import com.orangeguinee.api_park_orange.service.MarqueService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

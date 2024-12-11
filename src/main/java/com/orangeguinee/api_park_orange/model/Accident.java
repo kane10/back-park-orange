@@ -21,5 +21,6 @@ public class Accident {
     private Date dateAccident;
     private String description;
     private String rapport;
+    
 
 }
