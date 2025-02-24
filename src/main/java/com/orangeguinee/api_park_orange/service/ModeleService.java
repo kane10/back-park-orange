@@ -2,7 +2,6 @@ package com.orangeguinee.api_park_orange.service;
 
 import com.orangeguinee.api_park_orange.model.Modele;
 import com.orangeguinee.api_park_orange.repository.ModeleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

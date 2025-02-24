@@ -6,7 +6,7 @@ import com.orangeguinee.api_park_orange.model.Demandeur;
 import com.orangeguinee.api_park_orange.model.Vehicule;
 import com.orangeguinee.api_park_orange.repository.AffectationVehiculeRepository;
 import com.orangeguinee.api_park_orange.repository.DemandeurRepository;
-import com.orangeguinee.api_park_orange.repository.VehiculeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,13 @@ import java.util.Optional;
 public class AffectationVehiculeService {
 
 
-    private final VehiculeRepository vehiculeRepository;
+    private final com.orangeguinee.api_park_orange.repository.VehiculeRepository vehiculeRepository;
 
     private final DemandeurRepository demandeurRepository;
 
     private final AffectationVehiculeRepository affectationVehiculeRepository;
 
-    public AffectationVehiculeService(VehiculeRepository vehiculeRepository, DemandeurRepository demandeurRepository, AffectationVehiculeRepository affectationVehiculeRepository) {
+    public AffectationVehiculeService(com.orangeguinee.api_park_orange.repository.VehiculeRepository vehiculeRepository, DemandeurRepository demandeurRepository, AffectationVehiculeRepository affectationVehiculeRepository) {
         this.vehiculeRepository = vehiculeRepository;
         this.demandeurRepository = demandeurRepository;
         this.affectationVehiculeRepository = affectationVehiculeRepository;

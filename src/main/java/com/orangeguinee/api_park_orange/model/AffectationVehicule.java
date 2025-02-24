@@ -14,7 +14,7 @@ public class AffectationVehicule {
     private Long id;
 
     @ManyToOne
-    private Vehicule vehicule;
+    private com.orangeguinee.api_park_orange.model.Vehicule vehicule;
 
     @ManyToOne
     private Demandeur demandeur; // Relation avec Demandeur pour l'affectation
@@ -24,4 +24,6 @@ public class AffectationVehicule {
     private String typeAffectation; // Service ou fonction
 
 
+    public void setVehicule(Vehicule vehicule) {
+    }
 }

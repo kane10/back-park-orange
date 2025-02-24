@@ -1,57 +1,51 @@
 package com.orangeguinee.api_park_orange.controller;
 
+
+
 import com.orangeguinee.api_park_orange.model.Vehicule;
 import com.orangeguinee.api_park_orange.service.VehiculeService;
-import jakarta.persistence.PostUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vehicule")
+@RequestMapping("/api/vehicules")
+@CrossOrigin(origins = "http://localhost:5173") // Pour le développement avec Vite
 public class VehiculeController {
 
-    private final VehiculeService vehiculeService;
+    @Autowired
+    private VehiculeService vehiculeService;
 
-    public VehiculeController(VehiculeService vehiculeService) {
-        this.vehiculeService = vehiculeService;
-    }
-
-    @GetMapping("/list")
+    @GetMapping
     public List<Vehicule> getAllVehicules() {
         return vehiculeService.getAllVehicules();
     }
 
-    @GetMapping("/vehicule/{id}")
-    public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
-        return vehiculeService.getVehiculeById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{id}")
+    public Vehicule getVehiculeById(@PathVariable Long id) {
+        return vehiculeService.getVehiculeById(id);
     }
 
-    @PostMapping("/new")
-    public Vehicule createVehicule(@RequestBody Vehicule vehicule) {
-        return vehiculeService.saveVehicule(vehicule);
+    @PostMapping
+    public Vehicule createVehicule(@Valid @RequestBody Vehicule vehicule) {
+        return vehiculeService.createVehicule(vehicule);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Vehicule> updateVehicule(@PathVariable Long id, @RequestBody Vehicule vehicule) {
-        if (!vehiculeService.getVehiculeById(id).isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        vehicule.setId(id);
-        return ResponseEntity.ok(vehiculeService.saveVehicule(vehicule));
+    public Vehicule updateVehicule(@PathVariable Long id, @Valid @RequestBody Vehicule vehicule) {
+        return vehiculeService.updateVehicule(id, vehicule);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVehicule(@PathVariable Long id) {
-        if (!vehiculeService.getVehiculeById(id).isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<?> deleteVehicule(@PathVariable Long id) {
         vehiculeService.deleteVehicule(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/status/{status}")
+    public List<Vehicule> getVehiculesByStatus(@PathVariable String status) {
+        return vehiculeService.getVehiculesByStatus(status);
+    }
 }

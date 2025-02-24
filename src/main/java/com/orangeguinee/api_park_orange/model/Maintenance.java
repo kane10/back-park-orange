@@ -1,30 +1,37 @@
 package com.orangeguinee.api_park_orange.model;
 
+import com.orangeguinee.api_park_orange.model.MaintenanceProvider;
+import com.orangeguinee.api_park_orange.model.MaintenanceType;
+import com.orangeguinee.api_park_orange.model.Vehicule;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
 public class Maintenance {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "vehicule_id", nullable = false)
     private Vehicule vehicule;
 
-    @ManyToOne
-    @JoinColumn(name = "garage_id")
-    private Garage garage;
+    @Column(nullable = false)
+    private LocalDate date;
 
+    @Enumerated(EnumType.STRING)
+    private MaintenanceType type;
 
-    private String typeMaintenance; // vidange, changement de pneus, etc.
-    private Date date;
     private String description;
-    private double cout;
+    private Double cost;
+    private Integer mileage;
 
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    private MaintenanceProvider provider;
 
+    private LocalDate nextMaintenanceDate;
+    private Integer nextMaintenanceMileage;
 }
